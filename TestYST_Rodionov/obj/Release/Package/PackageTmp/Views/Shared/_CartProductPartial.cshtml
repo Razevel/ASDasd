@@ -1,0 +1,55 @@
+﻿@model TestYST_Rodionov.Models.OrderViewModel
+
+<div>
+    <dl class="dl-horizontal" style="margin-bottom: 50px">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Vendor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Vendor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Итого")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>
+        <dt>&nbsp;</dt>
+        <dd>&nbsp;</dd>
+        <dd>
+            @using (Html.BeginForm("Remove", "Cart"))
+            {
+                @Html.Hidden("id", Model.Product.Id)
+                <input type="submit" class="btn btn-primary" value="Удалить из корзины"/>
+            }
+        </dd>
+
+    </dl>
+    <hr/>
+</div>

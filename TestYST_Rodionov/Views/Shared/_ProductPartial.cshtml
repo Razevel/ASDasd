@@ -1,0 +1,48 @@
+﻿@model TestYST_Rodionov.Models.Entities.Product
+
+<div style="margin-bottom: 50px">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Наименование")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayName("Артикул")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendor)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Остаток на складе")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Цена")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>&nbsp;</dt>
+        <dd>&nbsp;</dd>
+        <dd>
+        @using (Html.BeginForm("Add", "Cart"))
+        {
+            @Html.Hidden("id", Model.Id)
+            <input type="submit" class="btn btn-primary" value="Добавить в корзину"/>
+        }
+        </dd>
+    </dl>
+    
+
+
+</div>

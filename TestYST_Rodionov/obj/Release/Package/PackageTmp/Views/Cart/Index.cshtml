@@ -1,0 +1,17 @@
+﻿@using TestYST_Rodionov.HtmlHelpers
+@using TestYST_Rodionov.Models
+@model List<OrderViewModel>
+@{
+    ViewBag.Title = "Корзина";
+}
+<div class="row">
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <div class="col-md-offset-3 col-md-7 col-lg-offset-3 col-lg-7">
+        @{
+            foreach (OrderViewModel o in Model)
+            {
+                @Html.Partial("_CartProductPartial", o)
+            }
+        }
+    </div>
+</div>

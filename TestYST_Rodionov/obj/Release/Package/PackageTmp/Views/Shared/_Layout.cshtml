@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – Магазин дисков</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand">Магазин дисков</span>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li id="mainPageLi">
+                    @Html.ActionLink("Главная", "Index", "Home")
+                </li>
+                <li id="catalogPageLi">
+                    @Html.ActionLink("Каталог", "List", "Catalog")
+                </li>
+            </ul>
+            @using (Html.BeginForm("Filter", "Catalog", FormMethod.Post, new {@class = "navbar-form navbar-left", role = "search"}))
+            {
+                <div class="form-group">
+                    <input type="text" name="filter" class="form-control" placeholder="Название/Артикул">
+                </div>
+                <button type="submit" class="btn btn-default">Поиск</button>
+            }
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.Action("Menu", "Cart")</li>
+
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm", style = "float: right", @class = "form-inline navbar-form right"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ActionLink("Личный кабинет", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage", @class = "btn btn-default"})
+                        <a class="btn btn-default" href="javascript:document.getElementById('logoutForm').submit()">Выход</a>
+                    }
+                }
+                else
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle navbar-link" data-toggle="dropdown">
+                            <i style="font-size: 22px" class="fa fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("Вход", "Login", "Account")
+                            </li>
+
+                            <li>
+                                @Html.ActionLink("Регистрация", "Register", "Account")
+                            </li>
+
+                        </ul>
+                    </li>
+                }
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container body-content" style="min-height: 700px">
+    @RenderBody()
+</div>
+
+<footer>
+    <div class="container text-center">
+        <p>&copy; @DateTime.Now.Year – Тестовое задание: Магазин дисков</p>
+        <p>Выполнил <a href="mailto:krowstel@gmail.com">Родионов Егор</a></p>
+    </div>
+</footer>
+<script>
+
+    $(document).ready(function() {
+        if (location.pathname === "/" || location.pathname === "/") {
+            $("#mainPageLi").addClass("active");
+        } else if (location.pathname.indexOf("Catalog") != -1) {
+            $("#catalogPageLi").addClass("active");
+        }
+    });
+
+</script>
+@Scripts.Render("~/bundles/main")
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</body>
+</html>

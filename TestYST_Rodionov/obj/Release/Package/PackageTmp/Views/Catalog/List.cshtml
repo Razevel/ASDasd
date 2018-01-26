@@ -1,0 +1,24 @@
+﻿@using TestYST_Rodionov.HtmlHelpers
+@using TestYST_Rodionov.Models
+@using TestYST_Rodionov.Models.Entities
+@model ProductsListViewModel
+@{
+    ViewBag.Title = "Каталог";
+    ViewData["returnUrl"] = Request.Url.PathAndQuery;
+}
+
+
+<div class="row">
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <div class="col-md-offset-3 col-md-7 col-lg-offset-3 col-lg-7">
+        @foreach (Product p in Model.Products)
+        {
+            @Html.Partial("_ProductPartial", p)
+        }
+        <div style="float: right">
+            @Html.PageLinks(Model.PaginationInfo, x => Url.Action("List", new { page = x }))
+        </div>
+    </div>
+</div>
+
+
